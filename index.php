@@ -1,24 +1,47 @@
 <?php
-include './controllers/course.php';
+?>
+<!DOCTYPE html>
+<html lang="en">
 
-use Controller\Course\Course_Controller;
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <!-- file boostrap -->
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
 
-// <!-- Lấy tất cả khóa học -->
-function get()
-{
-    $courses = Course_Controller::getAllCourse();
-    return $courses;
-};
+</head>
 
-// $courses=get();
+<body>
 
-// while ($row = $courses['result'] -> fetch_assoc()){
-//     echo $row['Name']."<br>";
-// };
-// // <!-- Thêm một Khóa học -->
-function add($name,$price){
-    $course=Course_Controller::createCourse($name,$price);
-    echo $course['result'];
+    <?php
+    if (isset($_GET['page'])) {
+        switch ($_GET['page']) {
+            case 'course/home':
+                require_once 'page/course/home.php';
+                break;
 
-}
-add('du',1000);
+            case 'course/edit':
+                require_once 'page/course/editCourse.php';
+                break;
+
+            case 'course/create':
+                require_once 'page/course/createCourse.php';
+                break;
+
+            case 'course/delete':
+                require_once 'page/course/deleteCourse.php';
+                break;
+            default:
+                require_once 'page/course/home.php';
+                break;
+        }
+    } else {
+        require_once 'page/course/home.php';
+    }
+
+    ?>
+</body>
+
+</html>
